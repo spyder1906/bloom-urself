@@ -25,3 +25,14 @@
   background: #b7791f;
   cursor: pointer;
 }
+
+.getStartedBtn {
+  background-color: #fff;
+  border: 2px solid #face00;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000;
+  padding: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}

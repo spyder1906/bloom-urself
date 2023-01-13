@@ -19,6 +19,12 @@ import {
 import { DashboardAdmin, Categories, Products, Orders } from "./admin";
 import { UserProfile, UserOrders, SettingUser } from "./shop/dashboardUser";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Goal from "./sign-up/goal";
+import Gender from "./sign-up/gender";
+import PhysicalIinfo from "./sign-up/physical-info";
+import DietType from "./sign-up/diet-type";
+import MealType from "./sign-up/meal-type";
+import MealPlanPreference from "./sign-up/meal-plan-preference";
 
 /* Routing All page will be here */
 const Routes = (props) => {
@@ -34,7 +40,12 @@ const Routes = (props) => {
         <Route exact path="/shipping-payment-policy" component={Shipping} />
         <Route exact path="/aboutus" component={About} />
         <Route exact path="/contact-us" component={Contact} />
-
+        <Route exact path="/sign-up/goal" component={Goal} />
+        <Route exact path="/sign-up/gender" component={Gender} />
+        <Route exact path="/sign-up/physical-info" component={PhysicalIinfo} />
+        <Route exact path="/sign-up/diet-type" component={DietType} />
+        <Route exact path="/sign-up/meal-type" component={MealType} />
+        <Route exact path="/sign-up/meal-plan-preference" component={MealPlanPreference} />
 
         <Route exact path="/products/:id" component={ProductDetails} /
         >
