@@ -26,6 +26,10 @@ const DietType = () => {
   const [categoryId, setCategoryId] = useState("");
   const history = useHistory();
 
+  const allData = JSON.parse(localStorage.getItem("data")) || {};
+
+  const changeHeight = (+allData.height * 30.48) / 100; //in meter
+
   return (
     <div className="flex justify-around main">
       <div className="left-card">
@@ -62,6 +66,16 @@ const DietType = () => {
       </div>
       <div className="right-card">
         <div className="an-20">Summary</div>
+        {Object.keys(allData).length > 0 && (
+          <>
+            <div>Age : {allData.age}</div>
+            <div>Height : {allData.height}</div>
+            <div>Width : {allData.width}</div>
+            <div>
+              Total : {(+allData.width / Math.pow(changeHeight, 2)).toFixed(2)}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

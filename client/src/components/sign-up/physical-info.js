@@ -1,10 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./signup.css";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useHistory } from "react-router-dom";
 
 const PhysicalIinfo = () => {
   const history = useHistory();
+  const [data, setData] = useState({
+    height: "",
+    width: "",
+    age: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
+
+  const allData = JSON.parse(localStorage.getItem("data")) || {};
+
+  const changeHeight = (+allData.height * 30.48) / 100; //in meter
+
+  useEffect(() => {
+    if (Object.keys(allData).length > 0) {
+      setData(allData);
+    }
+  }, [Object.keys(allData).length > 0]);
 
   return (
     <div className="flex justify-around main">
@@ -23,24 +46,56 @@ const PhysicalIinfo = () => {
           <div className="flex flex-col gap50">
             <div className="calculation-box">
               <span className="an-14">Age</span>
-              <input className="calculation-input" type="number" />
+              <input
+                className="calculation-input"
+                type="number"
+                value={data.age}
+                name="age"
+                onChange={handleChange}
+              />
             </div>
             <div className="calculation-box">
-              <span className="an-14">Wright (kg)</span>
-              <input className="calculation-input" type="number" />
+              <span className="an-14">Weight (kg)</span>
+              <input
+                className="calculation-input"
+                type="number"
+                value={data.width}
+                name="width"
+                onChange={handleChange}
+              />
             </div>
           </div>
           <div>height</div>
+          <input
+            className="calculation-input"
+            type="number"
+            value={data.height}
+            name="height"
+            onChange={handleChange}
+          />
         </div>
         <button
           className="nextBtn mt20"
-          onClick={(e) => history.push("/sign-up/diet-type")}
+          onClick={(e) => {
+            localStorage.setItem("data", JSON.stringify(data));
+            history.push("/sign-up/diet-type");
+          }}
         >
           Next
         </button>
       </div>
       <div className="right-card">
         <div className="an-20">Summary</div>
+        {Object.keys(allData).length > 0 && (
+          <>
+            <div>Age : {allData.age}</div>
+            <div>Height : {allData.height}</div>
+            <div>Width : {allData.width}</div>
+            <div>
+              Total : {(+allData.width / Math.pow(changeHeight, 2)).toFixed(2)}
+            </div>
+          </>
+        )}
       </div>
     </div>
   );

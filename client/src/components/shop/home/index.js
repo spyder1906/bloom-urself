@@ -28,7 +28,13 @@ const HomeComponent = () => {
       {/* Category, Search & Filter Section */}
       <section className="m-4 md:mx-8 md:my-6">
         <ProductCategory />
-        <button className="getStartedBtn" onClick={(e) => history.push("/sign-up/goal")}>
+        <button
+          className="getStartedBtn"
+          onClick={(e) => {
+            localStorage.setItem("data", JSON.stringify({}));
+            history.push("/sign-up/goal");
+          }}
+        >
           Get Started
         </button>
       </section>
