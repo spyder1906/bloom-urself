@@ -5,20 +5,19 @@ import { useHistory } from "react-router-dom";
 
 const dietTypeData = [
   {
-    name: "Let the nutritionist decide",
+    name: "Athlete meal",
+    img: "../images/diet_type1.svg",
     id: "1",
   },
   {
-    name: "Ketogenic",
+    name: "Diet meal",
+    img: "../images/diet_type2.svg",
     id: "2",
   },
   {
-    name: "Balanced",
+    name: "Customised meal",
+    img: "../images/diet_type3.svg",
     id: "3",
-  },
-  {
-    name: "Vegan",
-    id: "4",
   },
 ];
 
@@ -40,7 +39,7 @@ const DietType = () => {
           >
             <ArrowBackIcon />
           </div>
-          <div className="an-18 gray-text fill-width">
+          <div className="an-18 gray-text fill-width mb20">
             Choose your Diet Type
           </div>
         </div>
@@ -59,6 +58,7 @@ const DietType = () => {
                 backgroundColor: categoryId === data.id ? "#fbd40a" : "#fff",
               }}
             >
+              <img src={data.img} alt="img" className="ml10 mr20" />
               {data.name}
             </div>
           );
@@ -67,14 +67,17 @@ const DietType = () => {
       <div className="right-card">
         <div className="an-20">Summary</div>
         {Object.keys(allData).length > 0 && (
-          <>
-            <div>Age : {allData.age}</div>
-            <div>Height : {allData.height}</div>
-            <div>Width : {allData.width}</div>
-            <div>
-              Total : {(+allData.width / Math.pow(changeHeight, 2)).toFixed(2)}
-            </div>
-          </>
+          <div className="text-left">
+            <div className="mt10">Age : {allData.age}</div>
+            <div className="mt10">Height : {allData.height}</div>
+            <div className="mt10">Width : {allData.width}</div>
+            <button className="bmiBtn mt20">
+              <span>Your BMI:</span>
+              <div className="bmibtn-score">
+                {(+allData.width / Math.pow(changeHeight, 2)).toFixed(2)}
+              </div>
+            </button>
+          </div>
         )}
       </div>
     </div>

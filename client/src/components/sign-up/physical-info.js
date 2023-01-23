@@ -42,7 +42,7 @@ const PhysicalIinfo = () => {
           <div className="an-18 gray-text fill-width">Your BMI Calculator</div>
         </div>
 
-        <div className="flex mt15 justify-center gap50">
+        <div className="flex mt20 justify-center items-center gap50">
           <div className="flex flex-col gap50">
             <div className="calculation-box">
               <span className="an-14">Age</span>
@@ -65,17 +65,19 @@ const PhysicalIinfo = () => {
               />
             </div>
           </div>
-          <div>height</div>
-          <input
-            className="calculation-input"
-            type="number"
-            value={data.height}
-            name="height"
-            onChange={handleChange}
-          />
+          <div className="calculation-box" style={{height: 'fit-content'}}>
+            <span className="an-14">Height</span>
+            <input
+              className="calculation-input"
+              type="number"
+              value={data.height}
+              name="height"
+              onChange={handleChange}
+            />
+          </div>
         </div>
         <button
-          className="nextBtn mt20"
+          className="nextBtn mt30"
           onClick={(e) => {
             localStorage.setItem("data", JSON.stringify(data));
             history.push("/sign-up/diet-type");
@@ -85,16 +87,19 @@ const PhysicalIinfo = () => {
         </button>
       </div>
       <div className="right-card">
-        <div className="an-20">Summary</div>
+        <div className="an-20 uppercase mb20">Summary</div>
         {Object.keys(allData).length > 0 && (
-          <>
-            <div>Age : {allData.age}</div>
-            <div>Height : {allData.height}</div>
-            <div>Width : {allData.width}</div>
-            <div>
-              Total : {(+allData.width / Math.pow(changeHeight, 2)).toFixed(2)}
-            </div>
-          </>
+          <div className="text-left">
+            <div className="mt10">Age : {allData.age}</div>
+            <div className="mt10">Height : {allData.height}</div>
+            <div className="mt10">Width : {allData.width}</div>
+            <button className="bmiBtn mt20">
+              <span>Your BMI:</span>
+              <div className="bmibtn-score">
+                {(+allData.width / Math.pow(changeHeight, 2)).toFixed(2)}
+              </div>
+            </button>
+          </div>
         )}
       </div>
     </div>

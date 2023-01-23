@@ -6,14 +6,17 @@ import { useHistory } from "react-router-dom";
 const mealTypeData = [
   {
     name: "Veg",
+    img: "../images/veg.webp",
     id: "1",
   },
   {
     name: "Non Veg",
+    img: "../images/non_veg.webp",
     id: "2",
   },
   {
-    name: "Egg",
+    name: "Mixed",
+    img: "../images/mixed.webp",
     id: "3",
   },
 ];
@@ -21,6 +24,10 @@ const mealTypeData = [
 const MealType = () => {
   const [categoryId, setCategoryId] = useState("");
   const history = useHistory();
+
+  const allData = JSON.parse(localStorage.getItem("data")) || {};
+
+  const changeHeight = (+allData.height * 30.48) / 100; //in meter
 
   return (
     <div className="flex justify-around main">
@@ -51,6 +58,13 @@ const MealType = () => {
                   backgroundColor: categoryId === data.id ? "#fbd40a" : "#fff",
                 }}
               >
+                <img
+                  src={data.img}
+                  alt="img"
+                  className="pt15 pb20 margin-auto"
+                  width="62"
+                  height="35"
+                />
                 {data.name}
               </div>
             );
@@ -58,7 +72,20 @@ const MealType = () => {
         </div>
       </div>
       <div className="right-card">
-        <div className="an-20">Summary</div>
+        <div className="an-20 uppercase mb20">Summary</div>
+        {Object.keys(allData).length > 0 && (
+          <div className="text-left">
+            <div className="mt10">Age : {allData.age}</div>
+            <div className="mt10">Height : {allData.height}</div>
+            <div className="mt10">Width : {allData.width}</div>
+            <button className="bmiBtn mt20">
+              <span>Your BMI:</span>
+              <div className="bmibtn-score">
+                {(+allData.width / Math.pow(changeHeight, 2)).toFixed(2)}
+              </div>
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
